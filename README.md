@@ -244,9 +244,10 @@ The result would be a very long document that is by itself not actually readable
 
 However, this allows us to start looking at TF-IDF from a class-based perspective.
 
-Then, instead of applying TF-IDF to the newly created long documents, we have to take into account that TF-IDF will take the number of classes instead of the number of documents since we merged documents. 
+Then, instead of applying TF-IDF to the newly created long documents, we replace inverse document frequency with an inverse class frequency to measure how much information a term provides to a class.
+
 All these changes to TF-IDF results in the following formula: 
 
-$$c-TF-IDF_t,c = tf_t,c * \log(1 + \frac{A}{tf_t})$$
+$$W_{t,c} = tf_{t,c} \cdot \log(1 + \frac{A}{tf_t})$$
 
-Where the frequency of each word `t` is extracted for each class `c`. The inverse class frequency takes the average number of words per class `A` divided by total frequency of word `t` across all classes. To output only positive values, we add one to the division within the logarithm.
+Where the term frequency of each word `t` is extracted for each class `c`. The inverse class frequency takes the average number of words per class `A` divided by total term frequency of word `t` across all classes. To output only positive values, we add one to the division within the logarithm.
